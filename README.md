@@ -4,6 +4,7 @@
   <img src="https://img.shields.io/badge/Python-3.8+-blue.svg" alt="Python">
   <img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License">
   <img src="https://img.shields.io/badge/Platform-Windows-0078D4.svg" alt="Platform">
+  <img src="https://img.shields.io/badge/Tools-7-blueviolet.svg" alt="Tools">
 </p>
 
 <p align="center">
@@ -12,7 +13,7 @@
 
 > *"Knowledge is power, but analysis is understanding..."*
 
-**WinPE-Scan** est un analyseur de fichiers PE Windows (.exe, .dll, .sys) conçu pour l'analyse de malwares et la recherche en sécurité.
+**WinPE-Scan** est un toolkit multi-outils pour l'analyse de fichiers PE Windows (.exe, .dll, .sys). Un outil complet pour l'analyse de malwares et la recherche en sécurité.
 
 ---
 
@@ -29,16 +30,16 @@
 
 ## ✨ Fonctionnalités
 
-| Feature | Description |
-|---------|-------------|
-| 📋 **Headers Analysis** | Parse DOS, PE, NT headers |
-| 📦 **Sections** | Liste toutes les sections avec entropie |
-| 📥 **Imports** | Extrait DLLs et fonctions importées |
-| 📤 **Exports** | Liste les fonctions exportées |
-| 🔍 **Strings** | Extrait strings ASCII et Unicode |
-| 🚨 **Suspicious Patterns** | Détecte URLs, IPs, commandes, API sensibles |
-| 📊 **Hashes** | MD5, SHA1, SHA256 |
-| 📄 **Report** | Output terminal ou JSON |
+| Outil | Description |
+|-------|-------------|
+| 📊 **info** | Analyse complète du fichier PE |
+| 🔍 **strings** | Extraction de strings ASCII/Unicode |
+| 🔐 **hash** | Calcul de hashes (MD5, SHA1, SHA256, SHA512) |
+| 📋 **headers** | Visualisation des headers PE |
+| 📦 **sections** | Analyse détaillée des sections |
+| 📥 **imports** | Liste des imports/exports |
+| ⚖️ **compare** | Comparaison de deux fichiers PE |
+| ✓ **sig** | Information sur les signatures |
 
 ---
 
@@ -58,33 +59,104 @@ python3 winpe-scan.py
 ## 🚀 Utilisation
 
 ```bash
-# Analyse basique
-python3 winpe-scan.py malware.exe
+# Analyse complète
+python3 winpe-scan.py info malware.exe
 
-# Sauvegarder le rapport
-python3 winpe-scan.py -o report.txt suspicious.dll
+# Extraire les strings
+python3 winpe-scan.py strings sample.dll
+python3 winpe-scan.py strings file.exe -m 6 -f "http"
 
-# Output JSON (pour automation)
-python3 winpe-scan.py --json malware.exe > analysis.json
+# Calculer les hashes
+python3 winpe-scan.py hash suspicious.exe
 
-# Voir uniquement les strings
-python3 winpe-scan.py --strings sample.exe
+# Voir les headers
+python3 winpe-scan.py headers file.exe
+
+# Analyser les sections
+python3 winpe-scan.py sections malware.dll
+
+# Lister imports/exports
+python3 winpe-scan.py imports sample.exe
+
+# Comparer deux fichiers
+python3 winpe-scan.py compare file1.exe file2.exe
+
+# Info signature
+python3 winpe-scan.py sig file.exe
 ```
 
 ---
 
-## 📊 Exemple de Sortie
+## 🛠️ Outils Détaillés
+
+### info - Analyse Complète
+```
+python3 winpe-scan.py info malware.exe
+
+[ BASIC INFO ]
+  File:     malware.exe
+  Size:     45,232 bytes
+  MD5:      d41d8cd98f00b204e9800998ecf8427e
+  SHA256:   e3b0c44298fc1c149afbf4c8996fb924...
+
+[ SECTIONS ]
+  Name       VirtAddr      Entropy
+  .text      0x1000        6.87 ⚠️
+  .data      0x6000        3.21
+```
+
+### strings - Extraction de Strings
+```bash
+# Strings avec longueur minimale de 6
+python3 winpe-scan.py strings malware.exe -m 6
+
+# Filtrer par regex
+python3 winpe-scan.py strings file.exe -f "http"
+```
+
+### hash - Calcul de Hashes
+```
+python3 winpe-scan.py hash sample.dll
+
+MD5       d41d8cd98f00b204e9800998ecf8427e
+SHA1      da39a3ee5e6b4b0d3255bfef95601890afd80709
+SHA256    e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+SHA512    cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce...
+```
+
+### compare - Comparaison
+```
+python3 winpe-scan.py compare file1.exe file2.exe
+
+Hashes:
+  File 1: a1b2c3d4...
+  File 2: e5f6g7h8...
+  Match:  NO
+
+Imports:
+  File 1: 12 DLLs
+  File 2: 15 DLLs
+  Common: kernel32.dll, ntdll.dll, ws2_32.dll
+```
+
+---
+
+## 📊 Exemple Complet
 
 ```
 ╔══════════════════════════════════════════════════════════╗
-║                   WINPE-SCAN v1.0                        ║
-║           Windows PE File Analyzer                        ║
+║                   WINPE-SCAN v1.0                      ║
+║           Windows PE Multi-Tool Analyzer                ║
 ╚══════════════════════════════════════════════════════════╝
+
+Tools: info | strings | hash | headers | sections | imports | compare | sig
+
+$ python3 winpe-scan.py info suspicious.exe
 
 [ BASIC INFO ]
 ──────────────────────────────────────────────────
   File:     suspicious.exe
-  Size:     45,232 bytes (44.17 KB)
+  Size:     45,232 bytes
   MD5:      d41d8cd98f00b204e9800998ecf8427e
   SHA256:   e3b0c44298fc1c149afbf4c8996fb924...
 
@@ -94,34 +166,17 @@ python3 winpe-scan.py --strings sample.exe
   Sections:      4
   Subsystem:     Windows GUI
   Entry Point:   0x1000
-  Image Base:    0x400000
-  Timestamp:     2024-01-15 14:32:00
 
 [ SECTIONS ]
 ──────────────────────────────────────────────────
-  Name       VirtAddr      VirtSize     RawSize    Entropy  Flags
-──────────────────────────────────────────────────
-  .text      0x1000        0x5000       0x4800     6.87 ⚠️  CODE READ EXEC
-  .data      0x6000        0x1000       0x800      3.21      READ WRITE
-  .rsrc      0x7000        0x2000       0x1c00     4.12      READ
+  Name       VirtAddr      Entropy   Flags
+  .text      0x1000        6.87 ⚠️   CODE READ EXEC
+  .data      0x6000        3.21      READ WRITE
 
-[ IMPORTS ]
+[ SUSPICIOUS ]
 ──────────────────────────────────────────────────
-  kernel32.dll → CreateFileA, VirtualAlloc, CreateProcessA
-  ntdll.dll    → NtCreateFile, RtlMoveMemory
-  ws2_32.dll   → socket, connect, send, recv
-  urlmon.dll   → URLDownloadToFileA
-
-[ SUSPICIOUS PATTERNS ]
-──────────────────────────────────────────────────
-  🚨 HIGH   [NETWORK]  http://malicious-domain.com/payload.exe
-  🚨 HIGH   [COMMAND]  cmd.exe /c powershell -enc ...
-  ⚠️ MEDIUM [NETWORK]  192.168.1.100:8080
-  ⚠️ MEDIUM [CRYPTO]   Base64Decode detected
-
-──────────────────────────────────────────────────
-  Analysis complete. Found 4 suspicious items.
-  Generated by WinPE-Scan v1.0
+  🚨 HIGH   [NETWORK]  http://malicious-domain.com
+  🚨 HIGH   [COMMAND]  cmd.exe /c powershell...
 ```
 
 ---
@@ -130,32 +185,23 @@ python3 winpe-scan.py --strings sample.exe
 
 ```
 winpe-scan/
-├── winpe-scan.py       # Analyseur principal
+├── winpe-scan.py       # Multi-tool principal
 ├── README.md
 ├── LICENSE
 ├── LEGAL.md
-└── .gitignore
+├── .gitignore
+└── .assets/
+    └── logo.svg
 ```
 
 ---
 
-## 🔧 Fonctionnement
+## 🔧 Technologies
 
-### Parsing des Headers
-
-```
-DOS Header (MZ) → PE Header → NT Headers → File Header → Optional Header
-                                                             ↓
-                                              Section Headers (xN)
-```
-
-### Détection d'Anomalies
-
-- **Haute entropie** (>6.5) = probable packing/cryptage
-- **Sections avec noms suspects** = .upx, .aspack, .stub
-- **APIs réseau** = socket, connect, send = comportement réseau
-- **Commandes système** = cmd.exe, powershell = exécution
-- **IPs/URLs** = communication C2 potentielle
+- **Python 3.8+** - 100% Python, zero dépendances
+- **Colorama** - Couleurs dans le terminal
+- **Struct** - Parsing binaire natif
+- **Regex** - Détection de patterns
 
 ---
 
