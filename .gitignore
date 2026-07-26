@@ -7,17 +7,38 @@ __pycache__/
 build/
 dist/
 *.egg-info/
+*.egg
+.eggs/
+
+# Virtual environments
+.venv/
+venv/
+env/
 
 # IDE
 .vscode/
 .idea/
 *.swp
 *.swo
+*~
 
 # OS
 .DS_Store
 Thumbs.db
+Desktop.ini
+
+# Testing
+.coverage
+htmlcov/
+coverage.xml
+.pytest_cache/
+.mypy_cache/
 
 # Output
 *.json
+!pyproject.json
 reports/
+
+# Distribution
+*.whl
+*.tar.gz

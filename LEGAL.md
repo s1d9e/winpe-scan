@@ -1,27 +1,29 @@
-# Mentions Légales - WinPE-Scan
+# Legal Notice — WinPE-Scan
 
-## Clause de Non-Responsabilité
+## Disclaimer of Warranty
 
-**WinPE-Scan** est fourni "tel quel", sans aucune garantie.
+**WinPE-Scan** is provided "as is", without warranty of any kind, express or implied.
 
-En utilisant ce logiciel, vous acceptez d'être seul responsable de toute conséquence juridique ou matérielle.
+By using this software, you acknowledge that you are solely responsible for any legal or material consequences.
 
-## Utilisation Éducative
+## Authorized Use
 
-Ce projet est conçu pour :
-- L'apprentissage de l'analyse de binaires Windows
-- La recherche en sécurité
-- Les tests合法的 sur vos propres fichiers
+This project is designed for:
+- Learning about Windows binary analysis
+- Authorized security research and penetration testing
+- Malware analysis in controlled environments (sandbox/VM)
+- Academic research in computer security
 
-## Interdictions
+## Prohibited Use
 
-L'utilisation de WinPE-Scan est **STRICTEMENT INTERDITE** pour :
-- L'analyse non autorisée de fichiers protégés
-- Toute activité illégale
-- La création ou distribution de malware
+Use of WinPE-Scan is **STRICTLY PROHIBITED** for:
+- Unauthorized analysis of files you do not own or have explicit permission to analyze
+- Any illegal activity under applicable jurisdiction
+- Creation, distribution, or deployment of malware
+- Circumventing security controls on systems you do not own
 
-## Responsabilité
+## Limitation of Liability
 
-L'auteur (s1d9e) **ne peut être tenu responsable** de toute utilisation abusive de cet outil.
+The author (s1d9e) shall not be held liable for any damages arising from the use or misuse of this software.
 
-**En cas de doute, ne vous servez pas de cet outil.**
+**When in doubt, do not use this tool.**
