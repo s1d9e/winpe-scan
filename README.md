@@ -6,10 +6,34 @@
 <p align="center">
   <a href="https://github.com/s1d9e/winpe-scan/actions"><img src="https://github.com/s1d9e/winpe-scan/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
   <img src="https://img.shields.io/badge/Python-3.10+-3776AB.svg?logo=python&logoColor=white" alt="Python">
+  <img src="https://img.shields.io/badge/Platform-Windows%20%7C%20Linux-0078D4.svg" alt="Platform">
   <img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License">
-  <img src="https://img.shields.io/badge/Ruff-0_errors-000000.svg" alt="Ruff">
-  <img src="https://img.shields.io/badge/Mypy-0_errors-964EE8.svg" alt="Mypy">
+  <img src="https://img.shields.io/github/license/s1d9e/winpe-scan" alt="License">
+  <img src="https://img.shields.io/github/stars/s1d9e/winpe-scan?style=social" alt="Stars">
+  <img src="https://img.shields.io/github/forks/s1d9e/winpe-scan?style=social" alt="Forks">
+  <img src="https://img.shields.io/github/watchers/s1d9e/winpe-scan?style=social" alt="Watchers">
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Ruff-0__errors-000000.svg" alt="Ruff">
+  <img src="https://img.shields.io/badge/Mypy-0__errors-964EE8.svg" alt="Mypy">
   <img src="https://img.shields.io/badge/Tests-26%2F26-2ECC71.svg" alt="Tests">
+  <img src="https://img.shields.io/badge/Code%20Size-4k%20lines-blue.svg" alt="Code Size">
+  <img src="https://img.shields.io/github/last-commit/s1d9e/winpe-scan" alt="Last Commit">
+  <img src="https://img.shields.io/github/issues/s1d9e/winpe-scan" alt="Issues">
+  <img src="https://img.shields.io/github/issues-pr/s1d9e/winpe-scan" alt="PRs">
+  <img src="https://img.shields.io/badge/PRs-Welcome-brightgreen.svg" alt="PRs Welcome">
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Dependencies-Zero-orange.svg" alt="Zero Dependencies">
+  <img src="https://img.shields.io/badge/PE32-Supported-0078D4.svg" alt="PE32">
+  <img src="https://img.shields.io/badge/PE32%2B-Supported-0078D4.svg" alt="PE32+">
+  <img src="https://img.shields.io/badge/YARA-10__rules-E74C3C.svg" alt="YARA Rules">
+  <img src="https://img.shields.io/badge/Packers-10%2B-E67E22.svg" alt="Packer Detection">
+  <img src="https://img.shields.io/badge/VirusTotal-Integration-3498DB.svg" alt="VirusTotal">
+  <img src="https://img.shields.io/badge/Security-Tool-red.svg" alt="Security">
+  <img src="https://img.shields.io/badge/Made%20with-Python-FFD43B.svg?logo=python&logoColor=white" alt="Made with Python">
 </p>
 
 ---
