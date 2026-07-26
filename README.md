@@ -1,32 +1,20 @@
-# WinPE-Scan
-
 <p align="center">
-  <img src=".assets/logo.svg" width="400" alt="WinPE-Scan">
+  <h1 align="center">WinPE-Scan</h1>
+  <p align="center">Professional static analysis toolkit for Windows PE files</p>
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Python-3.10+-3776AB.svg?logo=python&logoColor=white" alt="Python">
-  <img src="https://img.shields.io/badge/Version-2.0.0-0078D4.svg" alt="Version">
-  <img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License">
-  <img src="https://img.shields.io/badge/Platform-Windows%20%7C%20Linux-0078D4.svg" alt="Platform">
   <a href="https://github.com/s1d9e/winpe-scan/actions"><img src="https://github.com/s1d9e/winpe-scan/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
-  <a href="https://github.com/s1d9e/winpe-scan/blob/main/LICENSE"><img src="https://img.shields.io/badge/Code%20Style-Ruff-000000.svg" alt="Ruff"></a>
-  <img src="https://img.shields.io/badge/Mypy-strict-964EE8.svg?logo=python&logoColor=white" alt="Mypy">
+  <img src="https://img.shields.io/badge/Python-3.10+-3776AB.svg?logo=python&logoColor=white" alt="Python">
+  <img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License">
+  <img src="https://img.shields.io/badge/Ruff-0_errors-000000.svg" alt="Ruff">
+  <img src="https://img.shields.io/badge/Mypy-0_errors-964EE8.svg" alt="Mypy">
+  <img src="https://img.shields.io/badge/Tests-26%2F26-2ECC71.svg" alt="Tests">
 </p>
-
-> *"Knowledge is power, but analysis is understanding."*
-
-**WinPE-Scan** is a professional-grade static analysis toolkit for Windows Portable Executable (PE) files. Built for malware analysts, reverse engineers, and security researchers.
 
 ---
 
-## Disclaimer
-
-> **FOR AUTHORIZED SECURITY RESEARCH AND EDUCATIONAL PURPOSES ONLY**
->
-> - Use only on files you are authorized to analyze
-> - The author assumes no liability for misuse
-> - Respect all applicable laws in your jurisdiction
+**WinPE-Scan** analyzes Windows executables (.exe, .dll, .sys) and detects malware indicators — packers, injection techniques, suspicious APIs, YARA patterns, and more. Zero heavy dependencies.
 
 ---
 
@@ -41,62 +29,47 @@ winpe-scan scan malware.exe
 
 ---
 
-## Live Demo
+## Demo
 
 ```
-════════════════════════════════════════════════════════════════════════
-║  W I N P E - S C A N  v2.0
-║  Windows PE Multi-Tool Analyzer
-║  For authorized security research only
-════════════════════════════════════════════════════════════════════════
-  Commands:  info | scan | strings | hash | headers | sections | imports | compare | sig
-
-════════════════════════════════════════════════════════════════════════
-  PE ANALYSIS REPORT  -- sample.exe
-════════════════════════════════════════════════════════════════════════
-
   Threat Score:  ██████████████████████████████  100/100 [CRITICAL]
 
   [ FILE INFO ]
   File:            sample.exe
-  Size:            32,768 bytes  (32.0 KB)
-  MD5:             974146898bf908e29fe9fa6ef23e0573
-  SHA256:          cee2ec8ddcc6c17498992858de60b89d2f18624d...
+  Size:            32,768 bytes
+  SHA256:          cee2ec8ddcc6c17498992858de60b89d...
 
   [ SECTIONS ]  (3 sections)
-  Name       VirtAddr     VirtSize     RawSize      Entropy                   Flags
-  .text      0x00001000   0x00003000   0x00003000   █░░░░░░░░░░░░░░░░░░░ 0.53  CODE EXEC READ
-  .data      0x00004000   0x00002000   0x00002000   ████████████░░░░░░░░ 4.98  READ WRITE
+  Name       VirtAddr     Entropy                   Flags
+  .text      0x00001000   █░░░░░░░░░░░░░░░░░░░ 0.53  CODE EXEC READ WRITE
+  .data      0x00004000   ████████████░░░░░░░░ 4.98  READ WRITE
 
   [ PACKER DETECTED ]
   Packer:          UPX
   Confidence:      95%
 
   [ THREAT INDICATORS ]  (21 found)
-  [CRITICAL] [YARA] Rule 'Ransomware_Indicators': Potential ransomware behavior
-           bitcoin, note
-  [CRITICAL] [YARA] Rule 'Process_Hollowing': Process hollowing technique
-           write, thread, alloc
-  [    HIGH] [PACKER] Detected packer/crypter: UPX
-  [    HIGH] [SECTION] Section '.text' is writable + executable (W^X violation)
-  [    HIGH] [COMMAND] Suspicious command pattern: certutil -urlcache
-  [  MEDIUM] [HARDENING] Missing security mitigations (3)
-           Missing: ASLR, CFG, GS Stack Cookie
+  [CRITICAL] [YARA] Ransomware behavior — bitcoin, note
+  [CRITICAL] [YARA] Process hollowing — write, thread, alloc
+  [    HIGH] [PACKER] UPX detected
+  [    HIGH] [SECTION] .text is writable + executable
+  [    HIGH] [COMMAND] certutil -urlcache
+  [  MEDIUM] [HARDENING] Missing ASLR, CFG, GS Stack Cookie
 
   [ YARA RULES ]  (6 rules matched)
-  [CRITICAL] Rule 'Ransomware_Indicators': Potential ransomware behavior
-  [CRITICAL] Rule 'Process_Hollowing': Process injection technique
-  [    HIGH] Rule 'Persistence_Scheduled_Task': Scheduled task creation
-  [    HIGH] Rule 'Network_C2_Communication': C2 communication patterns
-  [    HIGH] Rule 'Data_Exfiltration': Data exfiltration techniques
-  [  MEDIUM] Rule 'Living_off_the_Land': LOLBins usage
+  [CRITICAL] Ransomware_Indicators
+  [CRITICAL] Process_Hollowing
+  [    HIGH] Persistence_Scheduled_Task
+  [    HIGH] Network_C2_Communication
+  [    HIGH] Data_Exfiltration
+  [  MEDIUM] Living_off_the_Land
 
-  ════════════════════════════════════════════════════════════════════
-  Analysis complete.  Threat: 21  |  Risk: CRITICAL  |  Entropy: 1.92
-  ════════════════════════════════════════════════════════════════════
+  ══════════════════════════════════════════════════════════
+  Threat: 21  |  Risk: CRITICAL  |  Entropy: 1.92
+  ══════════════════════════════════════════════════════════
 ```
 
-Try it yourself: `python demo.py`
+Run it yourself: `python demo.py`
 
 ---
 
@@ -104,93 +77,49 @@ Try it yourself: `python demo.py`
 
 | Command | Description |
 |---------|-------------|
-| `info` | Full PE analysis with all sections |
-| `scan` | Threat-focused scan with heuristic scoring |
+| `info` | Full PE analysis — headers, sections, imports, strings, overlays |
+| `scan` | Threat-focused scan with risk score and YARA rules |
 | `strings` | Extract ASCII/Unicode strings with regex filter |
-| `hash` | Compute MD5, SHA1, SHA256, SHA512 hashes |
-| `headers` | Display PE header structures |
-| `sections` | Section analysis with entropy visualization |
+| `hash` | MD5, SHA1, SHA256, SHA512 |
+| `headers` | DOS, COFF, Optional, Rich header dump |
+| `sections` | Section table with entropy visualization |
 | `imports` | Import and export table listing |
 | `compare` | Side-by-side comparison of two PE files |
 | `sig` | Digital signature inspection |
+
+### Flags
+
+```bash
+--json -o report.json    # Export JSON report
+-d /path/to/samples/     # Batch scan directory
+--vt                     # VirusTotal lookup (needs VT_API_KEY)
+```
 
 ---
 
 ## Features
 
-### Core Analysis
-- **PE32 & PE32+** - Full 32-bit and 64-bit support
-- **Rich Header** - Decode MSVC toolchain metadata
-- **Shannon Entropy** - Statistical randomness measurement with visual bars
+**Parsing** — PE32 & PE32+, Rich header, import/export tables, overlay detection
 
-### Threat Detection
-- **Packer Detection** - UPX, Themida, VMProtect, ASPack, MPRESS, Obsidium, Enigma, MEW, FSG, PECompact
-- **Anti-Analysis Detection** - Anti-debug (IsDebuggerPresent, NtQueryInformationProcess...), anti-VM, process injection, privilege escalation, persistence
-- **YARA Rules** - 10 built-in detection rules for ransomware, C2, credential theft, LOLBins, data exfiltration
-- **Structural Anomalies** - Entry point outside code, W+X sections, missing ASLR/DEP/CFG
-- **Overlay Detection** - Data appended after PE image
+**Heuristics** — Packer detection (UPX, Themida, VMProtect, ASPack, MPRESS...), anti-debug/anti-VM APIs, process injection, privilege escalation, persistence, structural anomalies
 
-### Integrations
-- **VirusTotal** - Hash lookup via API (`--vt` flag)
-- **JSON Export** - Machine-readable reports (`--json -o report.json`)
-- **Batch Scanning** - Scan entire directories (`-d /path/`)
+**Detection** — 10 built-in YARA rules: ransomware, C2, credential theft, LOLBins, data exfiltration, process hollowing, cryptominers
+
+**Integrations** — VirusTotal hash lookup, JSON export, batch scanning
 
 ---
 
-## Usage
-
-```bash
-# Full analysis
-winpe-scan info malware.exe
-
-# Threat scan with risk score
-winpe-scan scan suspicious.exe
-
-# VirusTotal lookup
-VT_API_KEY=your_key winpe-scan scan malware.exe --vt
-
-# Batch scan a directory
-winpe-scan scan -d /path/to/samples/
-
-# Extract strings with filter
-winpe-scan strings malware.exe --filter "http" --min-length 6
-
-# Compare two files
-winpe-scan compare file1.exe file2.exe
-
-# Export JSON report
-winpe-scan info malware.exe --json -o report.json
-
-# Run the demo
-python demo.py
-```
-
----
-
-## Project Structure
+## Architecture
 
 ```
-winpe-scan/
-├── winpe_scan/
-│   ├── __init__.py         # Package version
-│   ├── __main__.py         # python -m winpe_scan
-│   ├── models.py           # Data models & threat constants
-│   ├── pe_parser.py        # PE binary parser engine
-│   ├── heuristics.py       # Threat detection heuristics
-│   ├── yara_rules.py       # Built-in YARA-style rules
-│   ├── virustotal.py       # VirusTotal API integration
-│   ├── display.py          # Terminal output formatting
-│   └── cli.py              # CLI argument parsing
-├── tests/
-│   └── test_pe_parser.py   # Unit tests (26 tests)
-├── demo.py                 # Interactive demo
-├── pyproject.toml           # Package configuration
-├── requirements.txt         # Runtime dependencies
-├── requirements-dev.txt     # Development dependencies
-├── .github/workflows/ci.yml # CI pipeline
-├── LICENSE
-├── LEGAL.md
-└── README.md
+winpe_scan/
+  pe_parser.py      # Binary parser engine
+  heuristics.py     # Threat detection logic
+  yara_rules.py     # Built-in detection rules
+  virustotal.py     # VT API integration
+  display.py        # Terminal output formatting
+  models.py         # Data models & constants
+  cli.py            # CLI argument parsing
 ```
 
 ---
@@ -198,59 +127,26 @@ winpe-scan/
 ## Development
 
 ```bash
-# Install with dev tools
 pip install -e ".[dev]"
-
-# Run tests
-pytest
-
-# Lint & format
-ruff check .
-ruff format .
-
-# Type check
-mypy winpe_scan/ --ignore-missing-imports
+pytest              # 26 tests
+ruff check .        # Lint
+mypy winpe_scan/ --ignore-missing-imports  # Types
 ```
 
 ---
 
-## Quality
+## Legal
 
-| Check | Status |
-|-------|--------|
-| Ruff lint | 0 errors |
-| Mypy strict | 0 errors |
-| Tests | 26/26 passing |
-| CI | GitHub Actions |
-
----
-
-## Technologies
-
-- **Python 3.10+** - Modern type hints, `from __future__ import annotations`
-- **Colorama** - Cross-platform terminal colors
-- **Struct** - Native binary parsing
-- **Shannon Entropy** - Statistical randomness measurement
-- **Built-in YARA** - Pattern-based detection without external deps
-- **Zero heavy dependencies** - Fast, portable, auditable
-
----
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit with conventional format (`feat:`, `fix:`, `docs:`)
-4. Push and open a Pull Request
+**For authorized security research and educational purposes only.** Use only on files you own or are authorized to analyze. See [LEGAL.md](LEGAL.md).
 
 ---
 
 ## License
 
-MIT License - see [LICENSE](LICENSE) for details.
+[MIT](LICENSE)
 
 ---
 
 <p align="center">
-  Built by <a href="https://github.com/s1d9e">s1d9e</a> — For authorized security research only
+  Built by <a href="https://github.com/s1d9e">s1d9e</a>
 </p>
